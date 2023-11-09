@@ -2,11 +2,13 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class EventCalenderTest {
+    EventCalender eventCalender = new EventCalender();
 
     @DisplayName("날짜를 입력 받아서 D-day 할인이 잘 적용되는지 테스트")
     @Test
@@ -20,16 +22,27 @@ public class EventCalenderTest {
         assertThat(dDayDiscountAmount).isEqualTo(1200);
     }
 
-    @Test
-    void checkWeekdayDiscountAmount() {
+    @ParameterizedTest
+    @ValueSource(ints = {3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 31})
+    void checkWeekdayDiscountAmount(int day) {
         // given
-        EventCalender eventCalender = new EventCalender();
         OrderServer orderServer = new OrderServer();
         // when
-        int day = 3;
         orderServer.inputStrParseToMap("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         int weekdayDiscountAmount = eventCalender.getWeekdayDiscountAmount(day, orderServer);
         // then
         assertThat(weekdayDiscountAmount).isEqualTo(4046);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30})
+    void checkWeekendDiscountAmount(int day) {
+        // given
+        OrderServer orderServer = new OrderServer();
+        // when
+        orderServer.inputStrParseToMap("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        int weekendDiscountAmount = eventCalender.getWeekendDiscountAmount(day, orderServer);
+        // then
+        assertThat(weekendDiscountAmount).isEqualTo(4046);
     }
 }
