@@ -18,9 +18,21 @@ public class PosMachine {
         return totalOrderAmount;
     }
 
-    // 할인정보와 증정품 가격을 입력받아 총혜택금액 계산
-    public int 총혜택금액_계산(List<Integer> 할인정보, int 증정품가격) {
-        return 0;
+    // 할인 정보와 증정품 가격을 입력받아 총 혜택 금액 계산
+    public int 총혜택금액_계산(List<Integer> discountInfo, int giftPrice) {
+        int totalDiscountAmount = getTotalDiscountAmount(discountInfo);
+        return totalDiscountAmount + giftPrice;
+    }
+
+    // 할인 정보를 입력받아 총 할인 금액을 계산
+    private int getTotalDiscountAmount(List<Integer> discountInfo) {
+        int totalDiscountAmount = 0;
+        if (!discountInfo.isEmpty()) {
+            for (int number : discountInfo) {
+                totalDiscountAmount += number;
+            }
+        }
+        return totalDiscountAmount;
     }
 
     // 총주문 금액과 할인 정보를 입력받아서 예상결제금액 리턴
