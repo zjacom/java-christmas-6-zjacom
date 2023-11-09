@@ -3,11 +3,12 @@ package christmas;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Parser {
+public class OrderServer {
+    Map<String, Integer> orderCheck = new HashMap<>();
     
     // (주문 음식 : 갯수) 형태로 반환
     // 구분에 String 배열을 사용하는데, 이 방법이 제일 빠른 방법인지 확인 필요.
-    public Map<String, Integer> inputStrParseToMap(String inputValue) {
+    public void inputStrParseToMap(String inputValue) {
         Map<String, Integer> parsedValue = new HashMap<>();
 
         String[] splitByComma = inputValue.split(",");
@@ -22,6 +23,10 @@ public class Parser {
                 parsedValue.put(menuName, menuQuantity);
             }
         }
-        return parsedValue;
+        this.orderCheck = parsedValue;
+    }
+
+    public Map<String, Integer> getOrderCheck() {
+        return orderCheck;
     }
 }
