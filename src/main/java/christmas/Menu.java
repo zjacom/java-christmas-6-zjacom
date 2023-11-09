@@ -16,7 +16,7 @@ public class Menu {
         menu.put("크리스마스파스타", 25000);
         menu.put("초코케이크", 15000);
         menu.put("아이스크림", 5000);
-        menu.put("제로콜라", 300);
+        menu.put("제로콜라", 3000);
         menu.put("레드와인", 60000);
         menu.put("샴페인", 25000);
     }
