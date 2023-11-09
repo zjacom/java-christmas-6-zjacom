@@ -5,10 +5,25 @@ import java.util.List;
 
 public class EventManager {
     // 할인정보를 필드로 가진다.
+    private boolean receiveGift = false;
+    private final String gift = "샴페인";
+    private final String noGift = "없음";
 
     // 총주문금액을 입력받아 샴페인을 증정할 수 있는지 판단
-    public String 증정품조건확인(int 총주문금액) {
-        return null;
+    public int getGiftInfo(PosMachine posMachine) {
+        Menu menu = new Menu();
+        if (posMachine.getTotalOrderAmount() >= 120000) {
+            receiveGift = true;
+            return menu.findMenuPrice(gift);
+        }
+        return 0;
+    }
+
+    public String queryReceiveGift() {
+        if (receiveGift) {
+            return gift;
+        }
+        return noGift;
     }
 
     // 날짜를 입력받아서 [디데이 할인, 평일 할인, 특별 할인]을 리턴
