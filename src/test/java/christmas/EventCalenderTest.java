@@ -29,7 +29,7 @@ public class EventCalenderTest {
         OrderServer orderServer = new OrderServer();
         // when
         orderServer.inputStrParseToMap("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
-        int weekdayDiscountAmount = eventCalender.getWeekdayDiscountAmount(day, orderServer);
+        int weekdayDiscountAmount = eventCalender.selectWeekdayOrWeekend(day, orderServer);
         // then
         assertThat(weekdayDiscountAmount).isEqualTo(4046);
     }
@@ -41,7 +41,7 @@ public class EventCalenderTest {
         OrderServer orderServer = new OrderServer();
         // when
         orderServer.inputStrParseToMap("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
-        int weekendDiscountAmount = eventCalender.getWeekendDiscountAmount(day, orderServer);
+        int weekendDiscountAmount = eventCalender.selectWeekdayOrWeekend(day, orderServer);
         // then
         assertThat(weekendDiscountAmount).isEqualTo(4046);
     }
