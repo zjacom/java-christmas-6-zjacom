@@ -33,4 +33,14 @@ public class EventManagerTest {
         assertThat(eventManager.getGiftInfo(posMachine)).isEqualTo(0);
         assertThat(eventManager.queryReceiveGift()).isEqualTo("없음");
     }
+
+    @Test
+    void checkBadge() {
+        // given
+        EventManager eventManager = new EventManager();
+        // when
+        String badge = eventManager.getBadge(5000);
+        // then
+        assertThat(badge).isEqualTo("별");
+    }
 }
