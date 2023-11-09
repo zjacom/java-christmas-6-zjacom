@@ -1,5 +1,6 @@
 package christmas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventManager {
@@ -11,8 +12,15 @@ public class EventManager {
     }
 
     // 날짜를 입력받아서 [디데이 할인, 평일 할인, 특별 할인]을 리턴
-    public List<Integer> 할인_확인(int 날짜) {
-        return null;
+    public List<Integer> getDiscountInfo(int day, OrderServer orderServer, PosMachine posMachine) {
+        EventCalender eventCalender = new EventCalender();
+        List<Integer> discountInfo = new ArrayList<>();
+        if (posMachine.getTotalOrderAmount() >= 10000) {
+            discountInfo.add(eventCalender.getDdayDiscountAmount(day));
+            discountInfo.add(eventCalender.selectWeekdayOrWeekend(day, orderServer));
+            discountInfo.add(eventCalender.getSpecialDiscountAmount(day));
+        }
+        return discountInfo;
     }
 
     // 총혜택금액을 입력 받아서 받을 수 있는 배지 리턴

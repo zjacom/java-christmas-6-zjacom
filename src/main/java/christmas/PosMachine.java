@@ -27,4 +27,8 @@ public class PosMachine {
     public int 예상결제금액_계산(List<Integer> 할인정보) {
         return 0;
     }
+
+    public int getTotalOrderAmount() {
+        return totalOrderAmount;
+    }
 }
