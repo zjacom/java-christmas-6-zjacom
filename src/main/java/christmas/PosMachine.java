@@ -4,10 +4,18 @@ import java.util.List;
 import java.util.Map;
 
 public class PosMachine {
+    Menu menu = new Menu();
+    private int totalOrderAmount = 0;
 
-    // (음식 이름, 가격)을 입력 받아서 총주문금액 계산
-    public int 총주문금액_계산(Map<String, Integer> 음식이름과총가격) {
-        return 0;
+    // (음식 이름, 개수)을 입력 받아서 총 주문 금액 계산
+    public int calculateTotalOrderAmount(Map<String, Integer> orderInfos) {
+        for (Map.Entry<String, Integer> orderInfo : orderInfos.entrySet()) {
+            String menuName = orderInfo.getKey();
+            int menuQuantity = orderInfo.getValue();
+
+            totalOrderAmount += menu.findMenuPrice(menuName) * menuQuantity;
+        }
+        return totalOrderAmount;
     }
 
     // 할인정보와 증정품 가격을 입력받아 총혜택금액 계산
