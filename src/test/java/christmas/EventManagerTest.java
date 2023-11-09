@@ -19,4 +19,18 @@ public class EventManagerTest {
         // given
         assertThat(eventManager.getDiscountInfo(day, orderServer, posMachine)).isEqualTo(List.of(1000, 4046, 0));
     }
+
+    @Test
+    void checkCustomerGetGift() {
+        // given
+        EventManager eventManager = new EventManager();
+        OrderServer orderServer = new OrderServer();
+        PosMachine posMachine = new PosMachine();
+        // when
+        orderServer.inputStrParseToMap("타파스-1,제로콜라-1");
+        posMachine.calculateTotalOrderAmount(orderServer.getOrderCheck());
+        // given
+        assertThat(eventManager.getGiftInfo(posMachine)).isEqualTo(0);
+        assertThat(eventManager.queryReceiveGift()).isEqualTo("없음");
+    }
 }
