@@ -39,7 +39,16 @@ public class EventManager {
     }
 
     // 총혜택금액을 입력 받아서 받을 수 있는 배지 리턴
-    public String 배지_확인(int 총혜택금액) {
-        return null;
+    public String getBadge(int totalBenefitAmount) {
+        if (totalBenefitAmount >= 20000) {
+            return "산타";
+        }
+        if (totalBenefitAmount >= 10000) {
+            return "트리";
+        }
+        if(totalBenefitAmount >= 5000) {
+            return "별";
+        }
+        return "없음";
     }
 }
