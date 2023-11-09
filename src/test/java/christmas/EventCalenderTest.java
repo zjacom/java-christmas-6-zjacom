@@ -45,4 +45,13 @@ public class EventCalenderTest {
         // then
         assertThat(weekendDiscountAmount).isEqualTo(4046);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {3, 10, 17, 24, 25, 31})
+    void checkSpecialDiscountAmount(int day) {
+        // when
+        int specialDiscountAmount = eventCalender.getSpecialDiscountAmount(day);
+        // then
+        assertThat(specialDiscountAmount).isEqualTo(1000);
+    }
 }
