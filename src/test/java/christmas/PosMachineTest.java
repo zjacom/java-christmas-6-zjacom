@@ -25,9 +25,23 @@ public class PosMachineTest {
         // given
         PosMachine posMachine = new PosMachine();
         // when
-        int totalBenefitAmount = posMachine.총혜택금액_계산(List.of(1000, 2000, 3000), 25000);
+        int totalBenefitAmount = posMachine.calculateTotalBenefitAmount(List.of(1000, 2000, 3000), 25000);
         // then
         assertThat(totalBenefitAmount).isEqualTo(31000);
+    }
+
+    @Test
+    void checkExpectedPayment() {
+        // given
+        PosMachine posMachine = new PosMachine();
+        OrderServer orderServer = new OrderServer();
+        // when
+        orderServer.inputStrParseToMap("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        Map<String, Integer> orderInfo = orderServer.getOrderCheck();
+        posMachine.calculateTotalOrderAmount(orderInfo);
+        int payment = posMachine.calculatePayment(List.of(1000, 2000, 3000));
+        // then
+        assertThat(payment).isEqualTo(136000);
 
     }
 }
