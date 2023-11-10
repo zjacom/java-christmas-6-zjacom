@@ -26,8 +26,7 @@ public class Menu {
         return menu.get(menuName);
     }
 
-    // 증정품 품목을 받아서 가격 정보를 리턴
-    public int 증정품_가격_정보(String 증정품_이름) {
-        return 0;
+    public Map<String, Integer> getMenu() {
+        return menu;
     }
 }
