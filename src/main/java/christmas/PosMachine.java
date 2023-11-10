@@ -40,6 +40,7 @@ public class PosMachine {
         return totalOrderAmount -= calculateTotalDiscountAmount(discountInfo);
     }
 
+    // 총 주문 금액 리턴
     public int getTotalOrderAmount() {
         return totalOrderAmount;
     }

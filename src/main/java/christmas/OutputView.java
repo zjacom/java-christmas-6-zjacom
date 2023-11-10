@@ -38,9 +38,9 @@ public class OutputView {
         System.out.println(giftMenu);
     }
 
-    // 할인 정보 리스트가 비어있고 giftInfo가 0이라면 없음
+    // 할인 정보 리스트가 비어있으면 없음 출력
     // 할인 정보에 값이 있다면 형식에 맞혀 변환하고 출력
-    // giftInfo가 있다면 출력
+    // 평일 할인인지 주말 할인인지 구분
     public void printDiscountInfo(List<Integer> discountInfo, int giftPrice, String dayOrEnd) {
         System.out.println();
         System.out.println("<혜택 내역>");
@@ -61,6 +61,7 @@ public class OutputView {
         return formattedNumber;
     }
 
+    // 총 혜택 금액 출력
     public void printTotalBenefitInfo(int totalBenefitAmount) {
         System.out.println();
         System.out.println("<총혜택 금액>");
@@ -75,6 +76,7 @@ public class OutputView {
         }
     }
 
+    // 총 결제 금액 출력
     public void printPayment(int payment) {
         System.out.println();
         System.out.println("<할인 후 예상 결제 금액>");
@@ -85,6 +87,7 @@ public class OutputView {
         System.out.println(formattedNumber + "원");
     }
 
+    // 이벤트 배지 출력
     public void printBadge(String badge) {
         System.out.println();
         System.out.println("<12월 이벤트 배지>");

@@ -26,6 +26,7 @@ public class Menu {
         return menu.get(menuName);
     }
 
+    // 메뉴판 반환
     public Map<String, Integer> getMenu() {
         return menu;
     }

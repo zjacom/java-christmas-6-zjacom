@@ -10,7 +10,7 @@ public class EventManager {
     private final String noGift = "없음";
     private List<Integer> discountInfo = new ArrayList<>();
 
-    // 총주문금액을 입력받아 샴페인을 증정할 수 있는지 판단
+    // 총 주문 금액을 입력받아 증정품을 증정할 수 있는지 판단하고 증정할 수 있다면 해당 가격을 리턴
     public int getGiftInfo(PosMachine posMachine, Menu menu) {
         if (posMachine.getTotalOrderAmount() >= 120000) {
             receiveGift = true;
@@ -19,6 +19,7 @@ public class EventManager {
         return 0;
     }
 
+    // 어떤 증정품을 증정할 수 있는지 리턴
     public String queryReceiveGift() {
         if (receiveGift) {
             return gift + " 1개";
@@ -50,6 +51,7 @@ public class EventManager {
         return "없음";
     }
 
+    // [x, y, z]로 구성된 할인 정보 리턴
     public List<Integer> getDiscountInfo() {
         return discountInfo;
     }

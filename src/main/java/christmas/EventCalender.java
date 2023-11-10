@@ -5,6 +5,7 @@ public class EventCalender {
     private int year = 2023;
     int month = Calendar.DECEMBER;
 
+    // 날짜를 입력 받아 주말인지 평일인지 리턴
     public String confirmWeekdayOrWeekend(int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
@@ -13,6 +14,7 @@ public class EventCalender {
         }
         return "평일 할인";
     }
+    // 디데이 할인 금액 리턴
     public int getDdayDiscountAmount(int day) {
         int discountAmount = 0;
         if (day >= 1 && day < 26) {
@@ -21,6 +23,7 @@ public class EventCalender {
         return discountAmount;
     }
 
+    // 디데이 할인 금액 계산
     private int calculateDdayDiscountAmount(int day) {
         int discountAmount = 900;
         for (int i = 0; i < day; i++) {
@@ -29,6 +32,7 @@ public class EventCalender {
         return discountAmount;
     }
 
+    // 주말 또는 평일인지 확인하고 알맞은 할인 금액 반환
     public int selectWeekdayOrWeekend(int day, OrderedMenu orderedMenu) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
@@ -65,6 +69,7 @@ public class EventCalender {
         return weekendDiscountAmount;
     }
 
+    // 스페셜 할인 금액 반환
     public int getSpecialDiscountAmount(int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
