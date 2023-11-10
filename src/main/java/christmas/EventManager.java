@@ -6,13 +6,12 @@ import java.util.List;
 public class EventManager {
     // 할인정보를 필드로 가진다.
     private boolean receiveGift = false;
-    private final String gift = "샴페인 1개";
+    private final String gift = "샴페인";
     private final String noGift = "없음";
     private List<Integer> discountInfo = new ArrayList<>();
 
     // 총주문금액을 입력받아 샴페인을 증정할 수 있는지 판단
-    public int getGiftInfo(PosMachine posMachine) {
-        Menu menu = new Menu();
+    public int getGiftInfo(PosMachine posMachine, Menu menu) {
         if (posMachine.getTotalOrderAmount() >= 120000) {
             receiveGift = true;
             return menu.findMenuPrice(gift);
@@ -22,7 +21,7 @@ public class EventManager {
 
     public String queryReceiveGift() {
         if (receiveGift) {
-            return gift;
+            return gift + " 1개";
         }
         return noGift;
     }

@@ -54,7 +54,7 @@ public class Validation {
 
     public int validateDay(String inputValue) {
         if (!inputValue.matches("^\\d+$")) {
-            throw new IllegalArgumentException("[ERROR] 숫자만 입력해주세요.");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
         int day = Integer.parseInt(inputValue);
         if (day < 1 || day > 31) {
