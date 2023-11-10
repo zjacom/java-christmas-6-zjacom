@@ -5,6 +5,14 @@ public class EventCalender {
     private int year = 2023;
     int month = Calendar.DECEMBER;
 
+    public String confirmWeekdayOrWeekend(int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        if (calendar.get(Calendar.DAY_OF_WEEK) >= Calendar.FRIDAY) {
+            return "주말 할인";
+        }
+        return "평일 할인";
+    }
     public int getDdayDiscountAmount(int day) {
         int discountAmount = 0;
         if (day >= 1 && day < 26) {
