@@ -11,11 +11,11 @@ public class PosMachineTest {
     void checkExpectedTotalOrderAmount() {
         // given
         PosMachine posMachine = new PosMachine();
-        OrderServer orderServer = new OrderServer();
-        orderServer.inputStrParseToMap("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
-        Map<String, Integer> orderInfo = orderServer.getOrderCheck();
+        OrderedMenu orderedMenu = new OrderedMenu();
+        orderedMenu.inputMenuChangeToOrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        Menu menu = new Menu();
         // when
-        int totalOrderAmount = posMachine.calculateTotalOrderAmount(orderInfo);
+        int totalOrderAmount = posMachine.calculateTotalOrderAmount(orderedMenu, menu);
         // then
         assertThat(totalOrderAmount).isEqualTo(142000);
     }
@@ -34,11 +34,11 @@ public class PosMachineTest {
     void checkExpectedPayment() {
         // given
         PosMachine posMachine = new PosMachine();
-        OrderServer orderServer = new OrderServer();
+        OrderedMenu orderedMenu = new OrderedMenu();
         // when
-        orderServer.inputStrParseToMap("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
-        Map<String, Integer> orderInfo = orderServer.getOrderCheck();
-        posMachine.calculateTotalOrderAmount(orderInfo);
+        orderedMenu.inputMenuChangeToOrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        Map<String, Integer> orderInfo = orderedMenu.getOrderedMenu();
+        posMachine.calculateTotalOrderAmount(orderedMenu, new Menu());
         int payment = posMachine.calculatePayment(List.of(1000, 2000, 3000));
         // then
         assertThat(payment).isEqualTo(136000);

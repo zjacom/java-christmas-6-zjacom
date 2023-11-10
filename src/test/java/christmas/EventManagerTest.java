@@ -10,25 +10,28 @@ public class EventManagerTest {
     void checkTotalDiscountInformation() {
         // given
         EventManager eventManager = new EventManager();
-        OrderServer orderServer = new OrderServer();
+        OrderedMenu orderedMenu = new OrderedMenu();
         PosMachine posMachine = new PosMachine();
+        Menu menu = new Menu();
         // when
         int day = 1;
-        orderServer.inputStrParseToMap("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
-        posMachine.calculateTotalOrderAmount(orderServer.getOrderCheck());
+        orderedMenu.inputMenuChangeToOrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        posMachine.calculateTotalOrderAmount(orderedMenu, menu);
+        eventManager.collectDiscountInfo(day, orderedMenu, posMachine);
         // given
-        assertThat(eventManager.getDiscountInfo(day, orderServer, posMachine)).isEqualTo(List.of(1000, 4046, 0));
+        assertThat(eventManager.getDiscountInfo()).isEqualTo(List.of(1000, 4046, 0));
     }
 
     @Test
     void checkCustomerGetGift() {
         // given
         EventManager eventManager = new EventManager();
-        OrderServer orderServer = new OrderServer();
+        OrderedMenu orderedMenu = new OrderedMenu();
         PosMachine posMachine = new PosMachine();
+        Menu menu = new Menu();
         // when
-        orderServer.inputStrParseToMap("타파스-1,제로콜라-1");
-        posMachine.calculateTotalOrderAmount(orderServer.getOrderCheck());
+        orderedMenu.inputMenuChangeToOrderedMenu("타파스-1,제로콜라-1");
+        posMachine.calculateTotalOrderAmount(orderedMenu, menu);
         // given
         assertThat(eventManager.getGiftInfo(posMachine)).isEqualTo(0);
         assertThat(eventManager.queryReceiveGift()).isEqualTo("없음");

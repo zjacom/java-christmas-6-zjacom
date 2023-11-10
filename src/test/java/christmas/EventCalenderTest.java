@@ -26,10 +26,10 @@ public class EventCalenderTest {
     @ValueSource(ints = {3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 31})
     void checkWeekdayDiscountAmount(int day) {
         // given
-        OrderServer orderServer = new OrderServer();
+        OrderedMenu orderedMenu = new OrderedMenu();
         // when
-        orderServer.inputStrParseToMap("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
-        int weekdayDiscountAmount = eventCalender.selectWeekdayOrWeekend(day, orderServer);
+        orderedMenu.inputMenuChangeToOrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        int weekdayDiscountAmount = eventCalender.selectWeekdayOrWeekend(day, orderedMenu);
         // then
         assertThat(weekdayDiscountAmount).isEqualTo(4046);
     }
@@ -38,10 +38,10 @@ public class EventCalenderTest {
     @ValueSource(ints = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30})
     void checkWeekendDiscountAmount(int day) {
         // given
-        OrderServer orderServer = new OrderServer();
+        OrderedMenu orderedMenu = new OrderedMenu();
         // when
-        orderServer.inputStrParseToMap("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
-        int weekendDiscountAmount = eventCalender.selectWeekdayOrWeekend(day, orderServer);
+        orderedMenu.inputMenuChangeToOrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        int weekendDiscountAmount = eventCalender.selectWeekdayOrWeekend(day, orderedMenu);
         // then
         assertThat(weekendDiscountAmount).isEqualTo(4046);
     }
