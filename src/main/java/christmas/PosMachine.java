@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 public class PosMachine {
-    Menu menu = new Menu();
     private int totalOrderAmount = 0;
 
     // (음식 이름, 개수)을 입력 받아서 총 주문 금액 계산
-    public int calculateTotalOrderAmount(Map<String, Integer> orderInfos) {
-        for (Map.Entry<String, Integer> orderInfo : orderInfos.entrySet()) {
-            String menuName = orderInfo.getKey();
-            int menuQuantity = orderInfo.getValue();
+    public int calculateTotalOrderAmount(OrderedMenu orderedMenu, Menu menu) {
+        Map<String, Integer> orderedMenus = orderedMenu.getOrderedMenu();
+        for (Map.Entry<String, Integer> menuInfo : orderedMenus.entrySet()) {
+            String menuName = menuInfo.getKey();
+            int menuQuantity = menuInfo.getValue();
 
             totalOrderAmount += menu.findMenuPrice(menuName) * menuQuantity;
         }
