@@ -12,13 +12,11 @@ public class OrderedMenuTest {
     @Test
     void inputValueParseToExpectedMap() {
         // given
-        Validation validation = new Validation();
-
         Map<String, Integer> expectedParsedValue = new HashMap<>();
         expectedParsedValue.put("타파스", 1);
         expectedParsedValue.put("제로콜라", 1);
         // when
-        OrderedMenu orderedMenu = new OrderedMenu(validation.validateOrder("타파스-1,제로콜라-1"));
+        OrderedMenu orderedMenu = new OrderedMenu("타파스-1,제로콜라-1");
         Map<String, Integer> parsedValue = orderedMenu.getOrderedMenu();
         // then
         boolean result = parsedValue.equals(expectedParsedValue);

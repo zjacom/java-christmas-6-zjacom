@@ -10,8 +10,7 @@ public class PosMachineTest {
     void checkExpectedTotalOrderAmount() {
         // given
         PosMachine posMachine = new PosMachine();
-        Validation validation = new Validation();
-        OrderedMenu orderedMenu = new OrderedMenu(validation.validateOrder("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1"));
+        OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         Menu menu = new Menu();
         // when
         int totalOrderAmount = posMachine.calculateTotalOrderAmount(orderedMenu, menu);
@@ -32,9 +31,8 @@ public class PosMachineTest {
     @Test
     void checkExpectedPayment() {
         // given
-        Validation validation = new Validation();
         PosMachine posMachine = new PosMachine();
-        OrderedMenu orderedMenu = new OrderedMenu(validation.validateOrder("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1"));
+        OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         // when
         posMachine.calculateTotalOrderAmount(orderedMenu, new Menu());
         int payment = posMachine.calculatePayment(List.of(1000, 2000, 3000));

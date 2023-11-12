@@ -1,5 +1,6 @@
 package christmas;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class OrderedMenu {
@@ -7,9 +8,24 @@ public class OrderedMenu {
     private final Map<String, Integer> orderedMenu;
 
     // (주문 음식 : 갯수)를 입력 받아 필드에 저장
-    public OrderedMenu(Map<String, Integer> orderedMenu) {
-        this.orderedMenu = orderedMenu;
+    public OrderedMenu(String inputValue) {
+        this.orderedMenu = parseInputValueToMap(inputValue);
     }
+
+    private Map<String, Integer> parseInputValueToMap(String inputValue) {
+        Map<String, Integer> orderedMenus = new HashMap<>();
+        String[] splitByComma = inputValue.split(",");
+
+        for (String pair : splitByComma) {
+            String[] splitByHyphen = pair.split("-");
+
+            String menuName = splitByHyphen[0];
+            int menuQuantity = Integer.parseInt(splitByHyphen[1]);
+            orderedMenus.put(menuName, menuQuantity);
+        }
+        return orderedMenus;
+    }
+
 
     // 주문한 내역 리턴
     public Map<String, Integer> getOrderedMenu() {

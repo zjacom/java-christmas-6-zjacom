@@ -9,9 +9,8 @@ public class EventManagerTest {
     @Test
     void checkTotalDiscountInformation() {
         // given
-        Validation validation = new Validation();
         EventManager eventManager = new EventManager();
-        OrderedMenu orderedMenu = new OrderedMenu(validation.validateOrder("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1"));
+        OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         PosMachine posMachine = new PosMachine();
         Menu menu = new Menu();
         // when
@@ -25,9 +24,8 @@ public class EventManagerTest {
     @Test
     void checkCustomerGetGift() {
         // given
-        Validation validation = new Validation();
         EventManager eventManager = new EventManager();
-        OrderedMenu orderedMenu = new OrderedMenu(validation.validateOrder("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1"));
+        OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         PosMachine posMachine = new PosMachine();
         Menu menu = new Menu();
         // when
