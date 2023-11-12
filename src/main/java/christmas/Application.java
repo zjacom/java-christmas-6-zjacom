@@ -1,27 +1,34 @@
 package christmas;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        boolean token = true;
         Validation validation = new Validation();
-        // 날짜 입력
         InputView inputView = new InputView();
+        // 날짜 입력
         int day = 0;
-        try {
-            day = validation.validateDay(inputView.readDate());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        while (token) {
+            try {
+                day = validation.validateDay(inputView.readDate());
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
+        String orderMenu = "";
         // 메뉴 입력
-        Map<String, Integer> orderMenu = new HashMap<>();
-        try {
-            orderMenu = validation.validateOrder(inputView.readOrder());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        while (token) {
+            orderMenu = inputView.readOrder();
+            try {
+                validation.validateOrder(orderMenu);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
         OrderedMenu orderedMenu = new OrderedMenu(orderMenu);
         Map<String, Integer> orderInfo = orderedMenu.getOrderedMenu();
