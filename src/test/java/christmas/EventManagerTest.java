@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import java.util.Map;
 import model.EventManager;
-import model.Menu;
 import model.OrderedMenu;
 import model.PosMachine;
 import org.junit.jupiter.api.Test;
@@ -18,10 +17,9 @@ public class EventManagerTest {
         OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         Map<String, Integer> orderedMenus = orderedMenu.getOrderedMenu();
         PosMachine posMachine = new PosMachine();
-        Menu menu = new Menu();
         // when
         int day = 1;
-        posMachine.calculateTotalOrderPrice(orderedMenu, menu);
+        posMachine.calculateTotalOrderPrice(orderedMenu);
         int totalOrderPrice = posMachine.getTotalOrderPrice();
         eventManager.checkCustomerCanGetDiscount(day, orderedMenus, totalOrderPrice);
         // given
@@ -35,11 +33,11 @@ public class EventManagerTest {
         OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         PosMachine posMachine = new PosMachine();
         // when
-        posMachine.calculateTotalOrderPrice(orderedMenu, new Menu());
+        posMachine.calculateTotalOrderPrice(orderedMenu);
         int totalOrderPrice = posMachine.getTotalOrderPrice();
         // given
         assertThat(eventManager.checkCustomerCanGetGift(totalOrderPrice)).isEqualTo("샴페인");
-        assertThat(eventManager.getGiftPrice(new Menu())).isEqualTo(25000);
+        assertThat(eventManager.getGiftPrice()).isEqualTo(25000);
     }
 
     @Test

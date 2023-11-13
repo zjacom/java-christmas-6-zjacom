@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class Service {
     PosMachine posMachine = new PosMachine();
-    Menu menu = new Menu();
     EventManager eventManager = new EventManager();
     private final Day day;
     private final OrderedMenu orderedMenu;
@@ -32,7 +31,7 @@ public class Service {
     }
 
     public int getGiftPrice() {
-        return eventManager.getGiftPrice(menu);
+        return eventManager.getGiftPrice();
     }
 
     public int getTotalBenefitPrice(int giftPrice) {

@@ -7,13 +7,13 @@ public class PosMachine {
     private int totalOrderPrice = 0;
 
     // (음식 이름, 개수)을 입력 받아서 총 주문 금액 계산
-    public int calculateTotalOrderPrice(OrderedMenu orderedMenu, Menu menu) {
+    public int calculateTotalOrderPrice(OrderedMenu orderedMenu) {
         Map<String, Integer> orderedMenus = orderedMenu.getOrderedMenu();
         for (Map.Entry<String, Integer> menuInfo : orderedMenus.entrySet()) {
             String menuName = menuInfo.getKey();
             int menuQuantity = menuInfo.getValue();
 
-            totalOrderPrice += menu.findMenuPrice(menuName) * menuQuantity;
+            totalOrderPrice += Menu.getPriceByName(menuName) * menuQuantity;
         }
         return totalOrderPrice;
     }

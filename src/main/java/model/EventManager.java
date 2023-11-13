@@ -7,7 +7,7 @@ import java.util.Map;
 public class EventManager {
     // 할인정보를 필드로 가진다.
     private boolean isCustomerCanReceiveGift = false;
-    private final String gift = "샴페인";
+    private final String gift = Menu.CHAMPAGNE.getName();
     private final List<Integer> discountDetails = new ArrayList<>();
 
     // 총 주문 금액을 입력받아 증정품을 증정할 수 있는지 판단하고 증정할 수 있다면 해당 가격을 리턴
@@ -20,9 +20,9 @@ public class EventManager {
     }
 
     // 어떤 증정품을 증정할 수 있는지 리턴
-    public int getGiftPrice(Menu menu) {
+    public int getGiftPrice() {
         if (isCustomerCanReceiveGift) {
-            return menu.findMenuPrice(gift);
+            return Menu.getPriceByName(gift);
         }
         return 0;
     }

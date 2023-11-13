@@ -1,33 +1,55 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class Menu {
-    // 필드(menu)에 메뉴를 넣는 더 좋은 방법을 찾아보자.
-    private Map<String, Integer> menu = new HashMap<>();
-    public Menu() {
-        menu.put("양송이스프", 6000);
-        menu.put("타파스", 5500);
-        menu.put("시저샐러드", 8000);
-        menu.put("티본스테이크", 55000);
-        menu.put("바비큐립", 54000);
-        menu.put("해산물파스타", 35000);
-        menu.put("크리스마스파스타", 25000);
-        menu.put("초코케이크", 15000);
-        menu.put("아이스크림", 5000);
-        menu.put("제로콜라", 3000);
-        menu.put("레드와인", 60000);
-        menu.put("샴페인", 25000);
+public enum Menu {
+    MUSHROOM_SOUP("양송이스프", 6000),
+    TAPAS("타파스", 5500),
+    CAESAR_SALAD("시저샐러드", 8000),
+    T_BONE_STEAK("티본스테이크", 55000),
+    BBQ_RIBS("바비큐립", 54000),
+    SEAFOOD_PASTA("해산물파스타", 35000),
+    CHRISTMAS_PASTA("크리스마스파스타", 25000),
+    CHOCOLATE_CAKE("초코케이크", 15000),
+    ICE_CREAM("아이스크림", 5000),
+    ZERO_COLA("제로콜라", 3000),
+    RED_WINE("레드와인", 60000),
+    CHAMPAGNE("샴페인", 25000);
+
+    private final String name;
+    private final int price;
+
+    Menu(String name, int price) {
+        this.name = name;
+        this.price = price;
     }
 
-    // 음식 이름을 받으면 매치되는 가격 리턴
-    public int findMenuPrice(String menuName) {
-        return menu.get(menuName);
+    public String getName() {
+        return name;
     }
 
-    // 메뉴판 반환
-    public Map<String, Integer> getMenu() {
-        return menu;
+    public int getPrice() {
+        return price;
+    }
+
+    public static int getPriceByName(String name) {
+        for (Menu item : Menu.values()) {
+            if (item.getName().equals(name)) {
+                return item.getPrice();
+            }
+        }
+        return 0;
+    }
+
+    public static List<String> getOrderedMenuNames() {
+        List<String> result = new ArrayList<>();
+        for (Menu item : Menu.values()) {
+            result.add(item.getName());
+        }
+        return result;
     }
 }
+

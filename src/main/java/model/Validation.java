@@ -9,7 +9,7 @@ public class Validation {
         validateFormat(inputValue);
         validateDuplicated(inputValue);
         validateQuantity(inputValue);
-        validateMenuNameInMenu(inputValue, new Menu());
+        validateMenuNameInMenu(inputValue);
     }
 
     private void validateInputValueConsistsOnlySupportedCharacters(String inputValue) {
@@ -60,7 +60,7 @@ public class Validation {
     }
 
 
-    private void validateMenuNameInMenu(String inputValue, Menu menu) {
+    private void validateMenuNameInMenu(String inputValue) {
         String[] splitByComma = inputValue.split(",");
 
         for (String pair : splitByComma) {
@@ -68,7 +68,7 @@ public class Validation {
 
             String menuName = splitByHyphen[0];
 
-            if (!menu.getMenu().keySet().contains(menuName)) {
+            if (!Menu.getOrderedMenuNames().contains(menuName)) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
