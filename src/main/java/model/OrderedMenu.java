@@ -17,15 +17,18 @@ public class OrderedMenu {
         String[] splitByComma = inputValue.split(",");
 
         for (String pair : splitByComma) {
-            String[] splitByHyphen = pair.split("-");
-
-            String menuName = splitByHyphen[0];
-            int menuQuantity = Integer.parseInt(splitByHyphen[1]);
-            orderedMenus.put(menuName, menuQuantity);
+            addMenuToOrderedMenu(orderedMenus, pair);
         }
         return orderedMenus;
     }
 
+    private void addMenuToOrderedMenu(Map<String, Integer> orderedMenus, String pair) {
+        String[] splitByHyphen = pair.split("-");
+
+        String menuName = splitByHyphen[0];
+        int menuQuantity = Integer.parseInt(splitByHyphen[1]);
+        orderedMenus.put(menuName, menuQuantity);
+    }
 
     // 주문한 내역 리턴
     public Map<String, Integer> getOrderedMenu() {

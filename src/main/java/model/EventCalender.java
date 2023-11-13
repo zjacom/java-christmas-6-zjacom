@@ -1,27 +1,36 @@
 package model;
+
 import java.util.Calendar;
 import java.util.Map;
 
 public class EventCalender {
     private final int year = 2023;
     private final int month = Calendar.DECEMBER;
+    private final String WEEKEND_DISCOUNT = "주말 할인";
+    private final String WEEKDAY_DISCOUNT = "평일 할인";
+
 
     // 날짜를 입력 받아 주말인지 평일인지 리턴
     public String checkReservedDayIsWeekdayOrWeekend(int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
-        if (calendar.get(Calendar.DAY_OF_WEEK) >= Calendar.FRIDAY) {
-            return "주말 할인";
+        if (isWeekend(calendar)) {
+            return WEEKEND_DISCOUNT;
         }
-        return "평일 할인";
+        return WEEKDAY_DISCOUNT;
     }
+
     // 디데이 할인 금액 리턴
     public int getDdayDiscountPrice(int day) {
         int discountPrice = 0;
-        if (day >= 1 && day < 26) {
+        if (isDayIncludeIntDdayEvent(day)) {
             discountPrice = calculateDdayDiscountPrice(day);
         }
         return discountPrice;
+    }
+
+    private boolean isDayIncludeIntDdayEvent(int day) {
+        return day >= 1 && day < 26;
     }
 
     // 디데이 할인 금액 계산
@@ -37,20 +46,27 @@ public class EventCalender {
     public int selectWeekdayOrWeekend(int day, Map<String, Integer> orderedMenus) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
-        if (calendar.get(Calendar.DAY_OF_WEEK) >= Calendar.FRIDAY) {
+        if (isWeekend(calendar)) {
             return getWeekendDiscountPrice(orderedMenus);
         }
-        if (calendar.get(Calendar.DAY_OF_WEEK) <= Calendar.THURSDAY) {
+        if (isWeekday(calendar)) {
             return getWeekdayDiscountPrice(orderedMenus);
         }
         return 0;
     }
 
+    private static boolean isWeekday(Calendar calendar) {
+        return calendar.get(Calendar.DAY_OF_WEEK) <= Calendar.THURSDAY;
+    }
+
+    private boolean isWeekend(Calendar calendar) {
+        return calendar.get(Calendar.DAY_OF_WEEK) >= Calendar.FRIDAY;
+    }
+
     private int getWeekdayDiscountPrice(Map<String, Integer> orderedMenus) {
         int weekdayDiscountAmount = 0;
         for (String menuName : orderedMenus.keySet()) {
-            // 문자열을 비교할 때 equals와 == 차이점 공부
-            if (menuName.equals("아이스크림") || menuName.equals("초코케이크")) {
+            if (isDessertMenu(menuName)) {
                 Integer menuQuantity = orderedMenus.get(menuName);
                 weekdayDiscountAmount += 2023 * menuQuantity;
             }
@@ -58,11 +74,15 @@ public class EventCalender {
         return weekdayDiscountAmount;
     }
 
+    private boolean isDessertMenu(String menuName) {
+        return menuName.equals(Menu.ICE_CREAM.getOrderedMenuName()) || menuName.equals(
+                Menu.CHOCOLATE_CAKE.getOrderedMenuName());
+    }
+
     private int getWeekendDiscountPrice(Map<String, Integer> orderedMenus) {
         int weekendDiscountAmount = 0;
         for (String menuName : orderedMenus.keySet()) {
-            // 비교할 조건이 너무 많다. -> 간단하게 표현할 수 있는 방법을 찾아보자.
-            if (menuName.equals("티본스테이크") || menuName.equals("바비큐립") || menuName.equals("해산물파스타") || menuName.equals("크리스마스파스타")) {
+            if (isMainMenu(menuName)) {
                 Integer menuQuantity = orderedMenus.get(menuName);
                 weekendDiscountAmount += 2023 * menuQuantity;
             }
@@ -70,13 +90,23 @@ public class EventCalender {
         return weekendDiscountAmount;
     }
 
+    private boolean isMainMenu(String menuName) {
+        return menuName.equals(Menu.T_BONE_STEAK.getOrderedMenuName()) || menuName.equals(
+                Menu.BBQ_RIBS.getOrderedMenuName()) || menuName.equals(Menu.SEAFOOD_PASTA.getOrderedMenuName())
+                || menuName.equals(Menu.CHRISTMAS_PASTA.getOrderedMenuName());
+    }
+
     // 스페셜 할인 금액 반환
     public int getSpecialDiscountAmount(int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
-        if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || day == 25) {
+        if (isSpecialDay(day, calendar)) {
             return 1000;
         }
         return 0;
+    }
+
+    private boolean isSpecialDay(int day, Calendar calendar) {
+        return calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || day == 25;
     }
 }

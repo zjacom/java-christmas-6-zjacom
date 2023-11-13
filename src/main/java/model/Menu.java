@@ -1,9 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public enum Menu {
     MUSHROOM_SOUP("양송이스프", 6000),
@@ -27,27 +25,27 @@ public enum Menu {
         this.price = price;
     }
 
-    public String getName() {
+    public String getOrderedMenuName() {
         return name;
     }
 
-    public int getPrice() {
+    private int getPrice() {
         return price;
     }
 
     public static int getPriceByName(String name) {
         for (Menu item : Menu.values()) {
-            if (item.getName().equals(name)) {
+            if (item.getOrderedMenuName().equals(name)) {
                 return item.getPrice();
             }
         }
         return 0;
     }
 
-    public static List<String> getOrderedMenuNames() {
+    public static List<String> getAllOrderedMenuName() {
         List<String> result = new ArrayList<>();
         for (Menu item : Menu.values()) {
-            result.add(item.getName());
+            result.add(item.getOrderedMenuName());
         }
         return result;
     }
