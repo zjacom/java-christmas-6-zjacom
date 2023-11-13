@@ -47,7 +47,7 @@ public class EventManager {
         if (totalBenefitPrice >= 10000) {
             return BADGE_TREE;
         }
-        if(totalBenefitPrice >= 5000) {
+        if (totalBenefitPrice >= 5000) {
             return BADGE_STAR;
         }
         return NOTHING;

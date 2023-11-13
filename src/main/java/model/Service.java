@@ -6,6 +6,7 @@ import java.util.Map;
 public class Service {
     PosMachine posMachine = new PosMachine();
     EventManager eventManager = new EventManager();
+    EventCalender eventCalender = new EventCalender();
     private final Day day;
     private final OrderedMenu orderedMenu;
 
@@ -34,19 +35,20 @@ public class Service {
         return eventManager.getGiftPrice();
     }
 
-    public int getTotalBenefitPrice(int giftPrice) {
-        return posMachine.calculateTotalBenefitPrice(eventManager.getDiscountDetails(), giftPrice);
+    public String getReservedDayIsWeekdayOrWeekend() {
+        return eventCalender.checkReservedDayIsWeekdayOrWeekend(day.getDay());
+    }
+
+    public int getTotalBenefitPrice() {
+        return posMachine.calculateTotalBenefitPrice(eventManager.getDiscountDetails(), eventManager.getGiftPrice());
     }
 
     public int getPayment() {
         return posMachine.calculatePayment(eventManager.getDiscountDetails());
     }
 
-    public String getBadge(int totalBenefitAmount) {
-        return eventManager.getBadge(totalBenefitAmount);
-    }
-
-    public int getReservedDay() {
-        return day.getDay();
+    public String getBadge() {
+        return eventManager.getBadge(posMachine.calculateTotalBenefitPrice(eventManager.getDiscountDetails(),
+                eventManager.getGiftPrice()));
     }
 }

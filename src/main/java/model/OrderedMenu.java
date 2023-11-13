@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class OrderedMenu {
     private final Map<String, Integer> orderedMenu;
+
     public OrderedMenu(String inputValue) {
         this.orderedMenu = parseInputValueToMap(inputValue);
     }

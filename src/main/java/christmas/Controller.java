@@ -5,15 +5,15 @@ import java.util.function.Supplier;
 import model.Validation;
 import view.InputView;
 
-public class InputValueController {
+public class Controller {
     Validation validation = new Validation();
     InputView inputView = new InputView();
 
-    public String inputDayLogic() {
+    public String inputDay() {
         return inputAndValidate(inputView::readDate, validation::validateDay);
     }
 
-    public String inputOrderLogic() {
+    public String inputOrder() {
         return inputAndValidate(inputView::readOrder, validation::validateOrder);
     }
 
