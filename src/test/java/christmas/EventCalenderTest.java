@@ -53,7 +53,7 @@ public class EventCalenderTest {
     @ValueSource(ints = {3, 10, 17, 24, 25, 31})
     void checkSpecialDiscountAmount(int day) {
         // when
-        int specialDiscountAmount = eventCalender.getSpecialDiscountAmount(day);
+        int specialDiscountAmount = eventCalender.getSpecialDiscountPrice(day);
         // then
         assertThat(specialDiscountAmount).isEqualTo(1000);
     }

@@ -4,10 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OrderedMenu {
-    // (주문 음식 : 갯수)를 저장하는 필드
     private final Map<String, Integer> orderedMenu;
-
-    // (주문 음식 : 갯수)를 입력 받아 필드에 저장
     public OrderedMenu(String inputValue) {
         this.orderedMenu = parseInputValueToMap(inputValue);
     }
@@ -27,10 +24,10 @@ public class OrderedMenu {
 
         String menuName = splitByHyphen[0];
         int menuQuantity = Integer.parseInt(splitByHyphen[1]);
+
         orderedMenus.put(menuName, menuQuantity);
     }
 
-    // 주문한 내역 리턴
     public Map<String, Integer> getOrderedMenu() {
         return orderedMenu;
     }

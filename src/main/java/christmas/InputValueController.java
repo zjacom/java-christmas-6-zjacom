@@ -8,21 +8,17 @@ import view.InputView;
 public class InputValueController {
     Validation validation = new Validation();
     InputView inputView = new InputView();
-    // 날짜 입력
 
     public String inputDayLogic() {
-        String validatedInput = inputAndValidate(inputView::readDate, validation::validateDay);
-        return validatedInput;
+        return inputAndValidate(inputView::readDate, validation::validateDay);
     }
 
     public String inputOrderLogic() {
-        String validatedInput = inputAndValidate(inputView::readOrder, validation::validateOrder);
-        return validatedInput;
+        return inputAndValidate(inputView::readOrder, validation::validateOrder);
     }
 
-
     private String inputAndValidate(Supplier<String> inputSupplier, Consumer<String> validationFunction) {
-        String inputValue = "";
+        String inputValue;
         while (true) {
             inputValue = inputSupplier.get();
             try {

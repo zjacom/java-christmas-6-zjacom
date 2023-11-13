@@ -9,18 +9,14 @@ public class EventCalender {
     private final String WEEKEND_DISCOUNT = "주말 할인";
     private final String WEEKDAY_DISCOUNT = "평일 할인";
 
-
-    // 날짜를 입력 받아 주말인지 평일인지 리턴
     public String checkReservedDayIsWeekdayOrWeekend(int day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
+        Calendar calendar = setUpCalendarInstance(day);
         if (isWeekend(calendar)) {
             return WEEKEND_DISCOUNT;
         }
         return WEEKDAY_DISCOUNT;
     }
 
-    // 디데이 할인 금액 리턴
     public int getDdayDiscountPrice(int day) {
         int discountPrice = 0;
         if (isDayIncludeIntDdayEvent(day)) {
@@ -33,19 +29,16 @@ public class EventCalender {
         return day >= 1 && day < 26;
     }
 
-    // 디데이 할인 금액 계산
     private int calculateDdayDiscountPrice(int day) {
-        int discountAmount = 900;
+        int discountPrice = 900;
         for (int i = 0; i < day; i++) {
-            discountAmount += 100;
+            discountPrice += 100;
         }
-        return discountAmount;
+        return discountPrice;
     }
 
-    // 주말 또는 평일인지 확인하고 알맞은 할인 금액 반환
     public int selectWeekdayOrWeekend(int day, Map<String, Integer> orderedMenus) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
+        Calendar calendar = setUpCalendarInstance(day);
         if (isWeekend(calendar)) {
             return getWeekendDiscountPrice(orderedMenus);
         }
@@ -53,6 +46,12 @@ public class EventCalender {
             return getWeekdayDiscountPrice(orderedMenus);
         }
         return 0;
+    }
+
+    private Calendar setUpCalendarInstance(int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        return calendar;
     }
 
     private static boolean isWeekday(Calendar calendar) {
@@ -64,14 +63,14 @@ public class EventCalender {
     }
 
     private int getWeekdayDiscountPrice(Map<String, Integer> orderedMenus) {
-        int weekdayDiscountAmount = 0;
+        int weekdayDiscountPrice = 0;
         for (String menuName : orderedMenus.keySet()) {
             if (isDessertMenu(menuName)) {
                 Integer menuQuantity = orderedMenus.get(menuName);
-                weekdayDiscountAmount += 2023 * menuQuantity;
+                weekdayDiscountPrice += 2023 * menuQuantity;
             }
         }
-        return weekdayDiscountAmount;
+        return weekdayDiscountPrice;
     }
 
     private boolean isDessertMenu(String menuName) {
@@ -80,14 +79,14 @@ public class EventCalender {
     }
 
     private int getWeekendDiscountPrice(Map<String, Integer> orderedMenus) {
-        int weekendDiscountAmount = 0;
+        int weekendDiscountPrice = 0;
         for (String menuName : orderedMenus.keySet()) {
             if (isMainMenu(menuName)) {
                 Integer menuQuantity = orderedMenus.get(menuName);
-                weekendDiscountAmount += 2023 * menuQuantity;
+                weekendDiscountPrice += 2023 * menuQuantity;
             }
         }
-        return weekendDiscountAmount;
+        return weekendDiscountPrice;
     }
 
     private boolean isMainMenu(String menuName) {
@@ -96,10 +95,8 @@ public class EventCalender {
                 || menuName.equals(Menu.CHRISTMAS_PASTA.getOrderedMenuName());
     }
 
-    // 스페셜 할인 금액 반환
-    public int getSpecialDiscountAmount(int day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
+    public int getSpecialDiscountPrice(int day) {
+        Calendar calendar = setUpCalendarInstance(day);
         if (isSpecialDay(day, calendar)) {
             return 1000;
         }

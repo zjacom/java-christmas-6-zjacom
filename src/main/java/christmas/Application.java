@@ -15,7 +15,7 @@ public class Application {
         EventCalender eventCalender = new EventCalender();
 
         // 입력 받은 메뉴 저장하고 출력
-        outputView.printMenu(service.getOrderedMenus());
+        outputView.printOrderedMenu(service.getOrderedMenus());
         // 총 주문 금액 계산
         outputView.printTotalOrderPrice(service.getTotalOrderPrice());
         // 증정품 출력

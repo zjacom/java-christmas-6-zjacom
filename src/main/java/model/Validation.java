@@ -6,6 +6,7 @@ import java.util.List;
 public class Validation {
     private final String ORDER_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private final String DAY_ERROR_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
+
     public void validateOrder(String inputValue) {
         validateInputValueConsistsOnlySupportedCharacters(inputValue);
         validateAnythingElse(inputValue);
@@ -35,7 +36,6 @@ public class Validation {
 
     private void validateMenuQuantityOverZero(String[] splitByHyphen) {
         int menuQuantity = Integer.parseInt(splitByHyphen[1]);
-
         if (menuQuantity < 1) {
             throw new IllegalArgumentException(ORDER_ERROR_MESSAGE);
         }
