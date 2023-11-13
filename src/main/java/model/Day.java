@@ -1,4 +1,4 @@
-package christmas;
+package model;
 
 public class Day {
     private final int day;

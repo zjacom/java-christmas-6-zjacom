@@ -3,6 +3,9 @@ package christmas;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import model.Menu;
+import model.OrderedMenu;
+import model.PosMachine;
 import org.junit.jupiter.api.Test;
 
 public class PosMachineTest {

@@ -3,6 +3,8 @@ package christmas;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;
+import model.EventCalender;
+import model.OrderedMenu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

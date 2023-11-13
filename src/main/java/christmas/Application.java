@@ -1,9 +1,8 @@
 package christmas;
 
-import controller.InputValueController;
-import java.util.Map;
+import model.EventCalender;
+import model.Service;
 import view.OutputView;
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
@@ -11,44 +10,28 @@ public class Application {
 
         // 날짜 및 주문 입력
         InputValueController inputValueController = new InputValueController();
-        Day day = inputValueController.inputDayLogic();
-        OrderedMenu orderedMenu = inputValueController.inputOrderLogic();
-
-
+        Service service = new Service(inputValueController.inputDayLogic(), inputValueController.inputOrderLogic());
         OutputView outputView = new OutputView();
-        PosMachine posMachine = new PosMachine();
-        Menu menu = new Menu();
-        EventManager eventManager = new EventManager();
+        EventCalender eventCalender = new EventCalender();
 
         // 입력 받은 메뉴 저장하고 출력
-        Map<String, Integer> orderedMenus = orderedMenu.getOrderedMenu();
-        outputView.printMenu(orderedMenus);
-
+        outputView.printMenu(service.getOrderedMenus());
         // 총 주문 금액 계산
-        posMachine.calculateTotalOrderPrice(orderedMenu, menu);
-        int totalOrderPrice = posMachine.getTotalOrderPrice();
-        outputView.printOrderAmount(posMachine.getTotalOrderPrice());
+        outputView.printTotalOrderPrice(service.getTotalOrderPrice());
+        // 증정품 출력
+        outputView.printGiftMenu(service.getGiftName());
 
-        // 할인 내역 계산
-        eventManager.checkCustomerCanGetDiscount(day.getDay(), orderedMenus, totalOrderPrice);
-        // [디데이, 주말/평일, 특별] 반환
-        List<Integer> discountInfo = eventManager.getDiscountDetails();
-        // 증정품 금액 반환
-        int giftPrice = eventManager.getGiftPrice(new Menu());
-        outputView.printGiftMenu(eventManager.checkCustomerCanGetGift(totalOrderPrice));
-        EventCalender eventCalender = new EventCalender();
-        outputView.printDiscountInfo(discountInfo, giftPrice, eventCalender.confirmWeekdayOrWeekend(day.getDay()));
+        // 할인 내역 출력
+        outputView.printDiscountDetails(service.getDiscountDetails(), service.getGiftPrice(),
+                eventCalender.checkReservedDayIsWeekdayOrWeekend(service.getReservedDay()));
 
         // 총 혜택 금액 계산하고 출력
-        int totalBenefitAmount = posMachine.calculateTotalBenefitPrice(discountInfo, giftPrice);
-        outputView.printTotalBenefitInfo(totalBenefitAmount);
+        outputView.printTotalBenefitInfo(service.getTotalBenefitPrice(service.getGiftPrice()));
 
         // 총 결제 금액 계산하고 출력
-        int payment = posMachine.calculatePayment(discountInfo);
-        outputView.printPayment(payment);
+        outputView.printPayment(service.getPayment());
 
         // 배지 여부 확인하고 출력
-        String badge = eventManager.getBadge(totalBenefitAmount);
-        outputView.printBadge(badge);
+        outputView.printBadge(service.getBadge(service.getTotalBenefitPrice(service.getGiftPrice())));
     }
 }

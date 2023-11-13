@@ -23,7 +23,7 @@ public class OutputView {
     }
 
     // 가격에 콤마를 넣고 원을 붙혀서 출력
-    public void printOrderAmount(int orderAmount) {
+    public void printTotalOrderPrice(int orderAmount) {
         System.out.println("<할인 전 총주문 금액>");
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
         String formattedNumber = decimalFormat.format(orderAmount);
@@ -41,16 +41,16 @@ public class OutputView {
     // 할인 정보 리스트가 비어있으면 없음 출력
     // 할인 정보에 값이 있다면 형식에 맞혀 변환하고 출력
     // 평일 할인인지 주말 할인인지 구분
-    public void printDiscountInfo(List<Integer> discountInfo, int giftPrice, String dayOrEnd) {
+    public void printDiscountDetails(List<Integer> discountDetails, int giftPrice, String weekdayOrWeekend) {
         System.out.println();
         System.out.println("<혜택 내역>");
-        if (discountInfo.isEmpty()) {
+        if (discountDetails.isEmpty()) {
             System.out.println("없음");
         }
-        if (!discountInfo.isEmpty()) {
-            System.out.println("크리스마스 디데이 할인: -" + convertNumber(discountInfo.get(0)) + "원");
-            System.out.println("평일 할인: -" + convertNumber(discountInfo.get(1)) + "원");
-            System.out.println(dayOrEnd + ": -" + convertNumber(discountInfo.get(2)) + "원");
+        if (!discountDetails.isEmpty()) {
+            System.out.println("크리스마스 디데이 할인: -" + convertNumber(discountDetails.get(0)) + "원");
+            System.out.println("평일 할인: -" + convertNumber(discountDetails.get(1)) + "원");
+            System.out.println(weekdayOrWeekend + ": -" + convertNumber(discountDetails.get(2)) + "원");
             System.out.println("증정 이벤트: -" + convertNumber(giftPrice) + "원");
         }
     }

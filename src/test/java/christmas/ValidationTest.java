@@ -2,6 +2,7 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import model.Validation;
 import org.junit.jupiter.api.Test;
 
 public class ValidationTest {

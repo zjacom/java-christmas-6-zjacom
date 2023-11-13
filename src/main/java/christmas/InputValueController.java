@@ -1,10 +1,8 @@
-package controller;
+package christmas;
 
-import christmas.Day;
-import christmas.OrderedMenu;
-import christmas.Validation;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import model.Validation;
 import view.InputView;
 
 public class InputValueController {
@@ -12,14 +10,14 @@ public class InputValueController {
     InputView inputView = new InputView();
     // 날짜 입력
 
-    public Day inputDayLogic() {
+    public String inputDayLogic() {
         String validatedInput = inputAndValidate(inputView::readDate, validation::validateDay);
-        return new Day(validatedInput);
+        return validatedInput;
     }
 
-    public OrderedMenu inputOrderLogic() {
+    public String inputOrderLogic() {
         String validatedInput = inputAndValidate(inputView::readOrder, validation::validateOrder);
-        return new OrderedMenu(validatedInput);
+        return validatedInput;
     }
 
 

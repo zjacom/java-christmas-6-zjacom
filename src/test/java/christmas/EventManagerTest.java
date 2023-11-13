@@ -4,6 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.Map;
+import model.EventManager;
+import model.Menu;
+import model.OrderedMenu;
+import model.PosMachine;
 import org.junit.jupiter.api.Test;
 
 public class EventManagerTest {

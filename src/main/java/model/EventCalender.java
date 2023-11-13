@@ -1,4 +1,4 @@
-package christmas;
+package model;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -7,7 +7,7 @@ public class EventCalender {
     private final int month = Calendar.DECEMBER;
 
     // 날짜를 입력 받아 주말인지 평일인지 리턴
-    public String confirmWeekdayOrWeekend(int day) {
+    public String checkReservedDayIsWeekdayOrWeekend(int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
         if (calendar.get(Calendar.DAY_OF_WEEK) >= Calendar.FRIDAY) {

@@ -1,7 +1,7 @@
-package christmas;
+package model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Validation {
     public void validateOrder(String inputValue) {
@@ -32,16 +32,17 @@ public class Validation {
     }
 
     private void validateDuplicated(String inputValue) {
-        Map<String, Integer> orderedMenus = new HashMap<>();
+        List<String> orderedMenu = new ArrayList<>();
         String[] splitByComma = inputValue.split(",");
 
         for (String pair : splitByComma) {
             String[] splitByHyphen = pair.split("-");
 
             String menuName = splitByHyphen[0];
-            if (orderedMenus.keySet().contains(menuName)) {
+            if (orderedMenu.contains(menuName)) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
+            orderedMenu.add(menuName);
         }
     }
 
