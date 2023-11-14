@@ -17,12 +17,18 @@ public class EventCalender {
         return WEEKDAY_DISCOUNT;
     }
 
+    private Calendar setUpCalendarInstance(int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        return calendar;
+    }
+
     public int getDdayDiscountPrice(int day) {
         int discountPrice = 0;
         if (isDayIncludeIntDdayEvent(day)) {
             discountPrice = calculateDdayDiscountPrice(day);
         }
-        return discountPrice;
+        return -discountPrice;
     }
 
     private boolean isDayIncludeIntDdayEvent(int day) {
@@ -34,10 +40,10 @@ public class EventCalender {
         for (int i = 0; i < day; i++) {
             discountPrice += 100;
         }
-        return discountPrice;
+        return -discountPrice;
     }
 
-    public int selectWeekdayOrWeekend(int day, Map<String, Integer> orderedMenus) {
+    public int getWeekendOrWeekdayDiscountPrice(int day, Map<String, Integer> orderedMenus) {
         Calendar calendar = setUpCalendarInstance(day);
         if (isWeekend(calendar)) {
             return getWeekendDiscountPrice(orderedMenus);
@@ -48,34 +54,8 @@ public class EventCalender {
         return 0;
     }
 
-    private Calendar setUpCalendarInstance(int day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
-        return calendar;
-    }
-
-    private static boolean isWeekday(Calendar calendar) {
-        return calendar.get(Calendar.DAY_OF_WEEK) <= Calendar.THURSDAY;
-    }
-
     private boolean isWeekend(Calendar calendar) {
         return calendar.get(Calendar.DAY_OF_WEEK) >= Calendar.FRIDAY;
-    }
-
-    private int getWeekdayDiscountPrice(Map<String, Integer> orderedMenus) {
-        int weekdayDiscountPrice = 0;
-        for (String menuName : orderedMenus.keySet()) {
-            if (isDessertMenu(menuName)) {
-                Integer menuQuantity = orderedMenus.get(menuName);
-                weekdayDiscountPrice += 2023 * menuQuantity;
-            }
-        }
-        return weekdayDiscountPrice;
-    }
-
-    private boolean isDessertMenu(String menuName) {
-        return menuName.equals(Menu.ICE_CREAM.getOrderedMenuName()) || menuName.equals(
-                Menu.CHOCOLATE_CAKE.getOrderedMenuName());
     }
 
     private int getWeekendDiscountPrice(Map<String, Integer> orderedMenus) {
@@ -86,13 +66,33 @@ public class EventCalender {
                 weekendDiscountPrice += 2023 * menuQuantity;
             }
         }
-        return weekendDiscountPrice;
+        return -weekendDiscountPrice;
     }
 
     private boolean isMainMenu(String menuName) {
         return menuName.equals(Menu.T_BONE_STEAK.getOrderedMenuName()) || menuName.equals(
                 Menu.BBQ_RIBS.getOrderedMenuName()) || menuName.equals(Menu.SEAFOOD_PASTA.getOrderedMenuName())
                 || menuName.equals(Menu.CHRISTMAS_PASTA.getOrderedMenuName());
+    }
+
+    private static boolean isWeekday(Calendar calendar) {
+        return calendar.get(Calendar.DAY_OF_WEEK) <= Calendar.THURSDAY;
+    }
+
+    private int getWeekdayDiscountPrice(Map<String, Integer> orderedMenus) {
+        int weekdayDiscountPrice = 0;
+        for (String menuName : orderedMenus.keySet()) {
+            if (isDessertMenu(menuName)) {
+                Integer menuQuantity = orderedMenus.get(menuName);
+                weekdayDiscountPrice += 2023 * menuQuantity;
+            }
+        }
+        return -weekdayDiscountPrice;
+    }
+
+    private boolean isDessertMenu(String menuName) {
+        return menuName.equals(Menu.ICE_CREAM.getOrderedMenuName()) || menuName.equals(
+                Menu.CHOCOLATE_CAKE.getOrderedMenuName());
     }
 
     public int getSpecialDiscountPrice(int day) {

@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test;
 
 public class EventManagerTest {
     @Test
-    void checkTotalDiscountInformation() {
+    void checkTotalDiscountInOnlyWeekday() {
         // given
         EventManager eventManager = new EventManager();
-        OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
-        Map<String, Integer> orderedMenus = orderedMenu.getOrderedMenu();
         PosMachine posMachine = new PosMachine();
         // when
-        int day = 1;
+        OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        Map<String, Integer> orderedMenus = orderedMenu.getOrderedMenu();
+        int day = 26;
         posMachine.calculateTotalOrderPrice(orderedMenu);
         int totalOrderPrice = posMachine.getTotalOrderPrice();
         eventManager.checkCustomerCanGetDiscount(day, orderedMenus, totalOrderPrice);

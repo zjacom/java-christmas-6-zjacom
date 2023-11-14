@@ -23,7 +23,7 @@ public class EventManager {
 
     public int getGiftPrice() {
         if (isCustomerCanReceiveGift) {
-            return Menu.getPriceByName(gift);
+            return -Menu.getPriceByName(gift);
         }
         return 0;
     }
@@ -36,7 +36,7 @@ public class EventManager {
 
     private void addDiscountDetail(int day, Map<String, Integer> orderedMenus, EventCalender eventCalender) {
         discountDetails.add(eventCalender.getDdayDiscountPrice(day));
-        discountDetails.add(eventCalender.selectWeekdayOrWeekend(day, orderedMenus));
+        discountDetails.add(eventCalender.getWeekendOrWeekdayDiscountPrice(day, orderedMenus));
         discountDetails.add(eventCalender.getSpecialDiscountPrice(day));
     }
 

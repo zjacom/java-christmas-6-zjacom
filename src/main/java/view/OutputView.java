@@ -38,10 +38,30 @@ public class OutputView {
             System.out.println("없음");
         }
         if (!discountDetails.isEmpty()) {
-            System.out.println("크리스마스 디데이 할인: -" + formattingDiscountPrice(discountDetails.get(0)) + "원");
-            System.out.println("평일 할인: -" + formattingDiscountPrice(discountDetails.get(1)) + "원");
-            System.out.println(weekdayOrWeekend + ": -" + formattingDiscountPrice(discountDetails.get(2)) + "원");
-            System.out.println("증정 이벤트: -" + formattingDiscountPrice(giftPrice) + "원");
+            if (discountDetails.get(0) != 0) {
+                System.out.println("크리스마스 디데이 할인: " + formattingDiscountPrice(discountDetails.get(0)) + "원");
+            }
+            if (discountDetails.get(0) == 0) {
+                System.out.println("크리스마스 디데이 할인: 0원");
+            }
+            if (discountDetails.get(1) != 0) {
+                System.out.println(weekdayOrWeekend + ": " + formattingDiscountPrice(discountDetails.get(1)) + "원");
+            }
+            if (discountDetails.get(1) == 0) {
+                System.out.println(weekdayOrWeekend + ": 0원");
+            }
+            if (discountDetails.get(2) != 0) {
+                System.out.println("특별 할인: " + formattingDiscountPrice(discountDetails.get(2)) + "원");
+            }
+            if (discountDetails.get(2) == 0) {
+                System.out.println("특별 할인: 0원");
+            }
+            if (giftPrice != 0) {
+                System.out.println("증정 이벤트: " + formattingDiscountPrice(giftPrice) + "원");
+            }
+            if (giftPrice == 0) {
+                System.out.println("증정 이벤트: 0원");
+            }
         }
     }
 
@@ -59,7 +79,7 @@ public class OutputView {
         if (totalBenefitPrice != 0) {
             DecimalFormat decimalFormat = new DecimalFormat("#,###");
             String formattedNumber = decimalFormat.format(totalBenefitPrice);
-            System.out.println("-" + formattedNumber + "원");
+            System.out.println(formattedNumber + "원");
         }
     }
 

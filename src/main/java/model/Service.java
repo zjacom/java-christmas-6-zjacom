@@ -15,6 +15,12 @@ public class Service {
         this.orderedMenu = new OrderedMenu(orderedMenu);
     }
 
+    public void serviceLogic() {
+        posMachine.calculateTotalOrderPrice(orderedMenu);
+        eventManager.checkCustomerCanGetDiscount(day.getDay(), orderedMenu.getOrderedMenu(),
+                posMachine.getTotalOrderPrice());
+    }
+
     public Map<String, Integer> getOrderedMenus() {
         return orderedMenu.getOrderedMenu();
     }
