@@ -89,4 +89,6 @@ public class ValidationTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
     }
+
+    // 음료만 주문했을 경우와 총 주문 수량이 20개 넘었을 때 예외 발생 추가
 }
