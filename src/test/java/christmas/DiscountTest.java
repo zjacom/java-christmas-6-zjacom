@@ -2,16 +2,15 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Map;
-import model.EventCalender;
+import model.Discount;
 import model.OrderedMenu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class EventCalenderTest {
-    EventCalender eventCalender = new EventCalender();
+public class DiscountTest {
+    Discount discount = new Discount();
 
     @DisplayName("고객이 디데이 이벤트 기간에 주문하면 디데이 할인을 받을 수 있다.")
     @Test
@@ -19,7 +18,7 @@ public class EventCalenderTest {
         // given
         int day = 3;
         // when
-        int dDayDiscountAmount = eventCalender.getDdayDiscountPrice(day);
+        int dDayDiscountAmount = discount.getDdayDiscountPrice(day);
         // then
         assertThat(dDayDiscountAmount).isEqualTo(-1200);
     }
@@ -29,7 +28,7 @@ public class EventCalenderTest {
     @ValueSource(ints = {26, 27, 28, 29, 30, 31})
     void customerReserveOutsideOfDdayEventPeriod(int day) {
         // when
-        int dDayDiscountAmount = eventCalender.getDdayDiscountPrice(day);
+        int dDayDiscountAmount = discount.getDdayDiscountPrice(day);
         // then
         assertThat(dDayDiscountAmount).isEqualTo(0);
     }
@@ -41,7 +40,7 @@ public class EventCalenderTest {
         // given
         OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         // when
-        int weekdayDiscountAmount = eventCalender.getWeekendOrWeekdayDiscountPrice(day, orderedMenu.getOrderedMenu());
+        int weekdayDiscountAmount = discount.getWeekendOrWeekdayDiscountPrice(day, orderedMenu.getOrderedMenu()).get(1);
         // then
         assertThat(weekdayDiscountAmount).isEqualTo(-4046);
     }
@@ -53,7 +52,7 @@ public class EventCalenderTest {
         // given
         OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,제로콜라-1");
         // when
-        int weekdayDiscountAmount = eventCalender.getWeekendOrWeekdayDiscountPrice(day, orderedMenu.getOrderedMenu());
+        int weekdayDiscountAmount = discount.getWeekendOrWeekdayDiscountPrice(day, orderedMenu.getOrderedMenu()).get(1);
         // then
         assertThat(weekdayDiscountAmount).isEqualTo(0);
     }
@@ -65,7 +64,7 @@ public class EventCalenderTest {
         // given
         OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         // when
-        int weekendDiscountAmount = eventCalender.getWeekendOrWeekdayDiscountPrice(day, orderedMenu.getOrderedMenu());
+        int weekendDiscountAmount = discount.getWeekendOrWeekdayDiscountPrice(day, orderedMenu.getOrderedMenu()).get(1);
         // then
         assertThat(weekendDiscountAmount).isEqualTo(-4046);
     }
@@ -77,7 +76,7 @@ public class EventCalenderTest {
         // given
         OrderedMenu orderedMenu = new OrderedMenu("양송이수프-1,초코케이크-2,제로콜라-1");
         // when
-        int weekendDiscountAmount = eventCalender.getWeekendOrWeekdayDiscountPrice(day, orderedMenu.getOrderedMenu());
+        int weekendDiscountAmount = discount.getWeekendOrWeekdayDiscountPrice(day, orderedMenu.getOrderedMenu()).get(1);
         // then
         assertThat(weekendDiscountAmount).isEqualTo(0);
     }
@@ -87,20 +86,8 @@ public class EventCalenderTest {
     @ValueSource(ints = {3, 10, 17, 24, 25, 31})
     void customerReservedInsideOfSpecialEventPeriod(int day) {
         // when
-        int specialDiscountAmount = eventCalender.getSpecialDiscountPrice(day);
+        int specialDiscountAmount = discount.getSpecialDiscountPrice(day);
         // then
         assertThat(specialDiscountAmount).isEqualTo(-1000);
-    }
-
-    // 수정
-    @DisplayName("날짜를 입력 받아서 주말인지 평일인지 확인하는 테스트")
-    @Test
-    void checkReservedDayIsWeekdayOrWeekend() {
-        // given
-        int day = 13;
-        // when
-        String weekday = eventCalender.checkReservedDayIsWeekdayOrWeekend(day);
-        // then
-        assertThat(weekday).isEqualTo("평일 할인");
     }
 }

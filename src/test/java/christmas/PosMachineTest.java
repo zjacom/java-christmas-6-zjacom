@@ -2,9 +2,8 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
 import model.OrderedMenu;
-import model.PosMachine;
+import model.service.PosMachine;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,8 @@ public class PosMachineTest {
         PosMachine posMachine = new PosMachine();
         OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         // when
-        int totalOrderAmount = posMachine.calculateTotalOrderPrice(orderedMenu);
+        posMachine.calculateTotalOrderPrice(orderedMenu);
+        int totalOrderAmount = posMachine.getTotalOrderPrice();
         // then
         assertThat(totalOrderAmount).isEqualTo(142000);
     }
@@ -26,10 +26,13 @@ public class PosMachineTest {
     void checkExpectedTotalBenefitPrice() {
         // given
         PosMachine posMachine = new PosMachine();
+        OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        posMachine.calculateTotalOrderPrice(orderedMenu);
+        posMachine.calculateTotalDiscountPrice(3, orderedMenu.getOrderedMenu());
         // when
-        int totalBenefitAmount = posMachine.calculateTotalBenefitPrice(List.of(-1000, -2046, -1000), -25000);
+        int totalBenefitAmount = posMachine.calculateTotalBenefitPrice();
         // then
-        assertThat(totalBenefitAmount).isEqualTo(-29046);
+        assertThat(totalBenefitAmount).isEqualTo(-31246);
     }
 
     @DisplayName("총 주문 금액과 할인 금액을 바탕으로 총 결제 금액을 계산한다.")
@@ -40,9 +43,9 @@ public class PosMachineTest {
         OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         // when
         posMachine.calculateTotalOrderPrice(orderedMenu);
-        int payment = posMachine.calculatePayment(List.of(-1000, -2046, -1000));
+        posMachine.calculateTotalDiscountPrice(3, orderedMenu.getOrderedMenu());
         // then
-        assertThat(payment).isEqualTo(137954);
+        assertThat(posMachine.calculatePayment()).isEqualTo(135754);
 
     }
 }
