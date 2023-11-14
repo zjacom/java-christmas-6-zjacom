@@ -1,6 +1,6 @@
 package christmas;
 
-import model.Service;
+import model.service.Service;
 import view.OutputView;
 
 public class Application {
@@ -8,7 +8,6 @@ public class Application {
         Controller controller = new Controller();
         Service service = new Service(controller.inputDay(), controller.inputOrder());
         OutputView outputView = new OutputView();
-        service.serviceLogic();
 
         // 입력 받은 메뉴 저장하고 출력
         outputView.printOrderedMenu(service.getOrderedMenus());

@@ -3,6 +3,7 @@ package view;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
+import model.Menu;
 
 public class OutputView {
     public void printOrderedMenu(Map<String, Integer> orderedMenu) {
@@ -29,7 +30,12 @@ public class OutputView {
     public void printGiftMenu(String giftMenu) {
         System.out.println();
         System.out.println("<증정 메뉴>");
-        System.out.println(giftMenu + " 1개");
+        if (giftMenu.equals("없음")) {
+            System.out.println(giftMenu);
+        }
+        if (giftMenu.equals(Menu.CHAMPAGNE.getOrderedMenuName())) {
+            System.out.println(giftMenu + " 1개");
+        }
     }
 
     public void printDiscountDetails(List<Integer> discountDetails, int giftPrice, String weekdayOrWeekend) {
