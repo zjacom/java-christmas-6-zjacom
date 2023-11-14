@@ -40,7 +40,7 @@ public class EventCalender {
         for (int i = 0; i < day; i++) {
             discountPrice += 100;
         }
-        return -discountPrice;
+        return discountPrice;
     }
 
     public int getWeekendOrWeekdayDiscountPrice(int day, Map<String, Integer> orderedMenus) {
@@ -98,7 +98,7 @@ public class EventCalender {
     public int getSpecialDiscountPrice(int day) {
         Calendar calendar = setUpCalendarInstance(day);
         if (isSpecialDay(day, calendar)) {
-            return 1000;
+            return -1000;
         }
         return 0;
     }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class OutputView {
     public void printOrderedMenu(Map<String, Integer> orderedMenu) {
+        System.out.println("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
         System.out.println();
         System.out.println("<주문 메뉴>");
         StringBuilder result = new StringBuilder();
@@ -28,7 +29,7 @@ public class OutputView {
     public void printGiftMenu(String giftMenu) {
         System.out.println();
         System.out.println("<증정 메뉴>");
-        System.out.println(giftMenu);
+        System.out.println(giftMenu + " 1개");
     }
 
     public void printDiscountDetails(List<Integer> discountDetails, int giftPrice, String weekdayOrWeekend) {
@@ -38,30 +39,11 @@ public class OutputView {
             System.out.println("없음");
         }
         if (!discountDetails.isEmpty()) {
-            if (discountDetails.get(0) != 0) {
-                System.out.println("크리스마스 디데이 할인: " + formattingDiscountPrice(discountDetails.get(0)) + "원");
-            }
-            if (discountDetails.get(0) == 0) {
-                System.out.println("크리스마스 디데이 할인: 0원");
-            }
-            if (discountDetails.get(1) != 0) {
-                System.out.println(weekdayOrWeekend + ": " + formattingDiscountPrice(discountDetails.get(1)) + "원");
-            }
-            if (discountDetails.get(1) == 0) {
-                System.out.println(weekdayOrWeekend + ": 0원");
-            }
-            if (discountDetails.get(2) != 0) {
-                System.out.println("특별 할인: " + formattingDiscountPrice(discountDetails.get(2)) + "원");
-            }
-            if (discountDetails.get(2) == 0) {
-                System.out.println("특별 할인: 0원");
-            }
-            if (giftPrice != 0) {
-                System.out.println("증정 이벤트: " + formattingDiscountPrice(giftPrice) + "원");
-            }
-            if (giftPrice == 0) {
-                System.out.println("증정 이벤트: 0원");
-            }
+            System.out.println("크리스마스 디데이 할인: " + formattingDiscountPrice(discountDetails.get(0)) + "원");
+            System.out.println(weekdayOrWeekend + ": " + formattingDiscountPrice(discountDetails.get(1)) + "원");
+            System.out.println("특별 할인: " + formattingDiscountPrice(discountDetails.get(2)) + "원");
+            System.out.println("증정 이벤트: " + formattingDiscountPrice(giftPrice) + "원");
+
         }
     }
 

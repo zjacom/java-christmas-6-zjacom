@@ -1,10 +1,13 @@
 package model;
 
+import static java.lang.Math.abs;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class EventManager {
+    EventCalender eventCalender = new EventCalender();
     private boolean isCustomerCanReceiveGift = false;
     private final String gift = Menu.CHAMPAGNE.getOrderedMenuName();
     private final List<Integer> discountDetails = new ArrayList<>();
@@ -30,24 +33,24 @@ public class EventManager {
 
     public void checkCustomerCanGetDiscount(int day, Map<String, Integer> orderedMenus, int totalOrderPrice) {
         if (totalOrderPrice >= 10000) {
-            addDiscountDetail(day, orderedMenus, new EventCalender());
+            addDiscountDetail(day, orderedMenus);
         }
     }
 
-    private void addDiscountDetail(int day, Map<String, Integer> orderedMenus, EventCalender eventCalender) {
+    private void addDiscountDetail(int day, Map<String, Integer> orderedMenus) {
         discountDetails.add(eventCalender.getDdayDiscountPrice(day));
         discountDetails.add(eventCalender.getWeekendOrWeekdayDiscountPrice(day, orderedMenus));
         discountDetails.add(eventCalender.getSpecialDiscountPrice(day));
     }
 
     public String getBadge(int totalBenefitPrice) {
-        if (totalBenefitPrice >= 20000) {
+        if (abs(totalBenefitPrice) >= 20000) {
             return BADGE_SANTA;
         }
-        if (totalBenefitPrice >= 10000) {
+        if (abs(totalBenefitPrice) >= 10000) {
             return BADGE_TREE;
         }
-        if (totalBenefitPrice >= 5000) {
+        if (abs(totalBenefitPrice) >= 5000) {
             return BADGE_STAR;
         }
         return NOTHING;

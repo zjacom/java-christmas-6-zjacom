@@ -33,7 +33,7 @@ public class PosMachine {
     }
 
     public int calculatePayment(List<Integer> discountDetails) {
-        return totalOrderPrice - calculateTotalDiscountPrice(discountDetails);
+        return totalOrderPrice + calculateTotalDiscountPrice(discountDetails);
     }
 
     public int getTotalOrderPrice() {
