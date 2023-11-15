@@ -15,9 +15,9 @@ public class EventManagerTest {
     void customerCanNotParticipateEvent() {
         // given
         PosMachine posMachine = new PosMachine();
+        OrderedMenu orderedMenu = new OrderedMenu("양송이수프-1");
         int day = 1;
         // when
-        OrderedMenu orderedMenu = new OrderedMenu("양송이수프-1");
         posMachine.calculateTotalOrderPrice(orderedMenu);
         int totalOrderPrice = posMachine.getTotalOrderPrice();
         // given
@@ -28,14 +28,14 @@ public class EventManagerTest {
     @Test
     void customerCanReceiveGift() {
         // given
-        OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         PosMachine posMachine = new PosMachine();
+        OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         // when
         posMachine.calculateTotalOrderPrice(orderedMenu);
         int totalOrderPrice = posMachine.getTotalOrderPrice();
         // given
         assertThat(eventManager.getGiftName(totalOrderPrice)).isEqualTo("샴페인");
-        assertThat(eventManager.getGiftPrice(totalOrderPrice)).isEqualTo(25000);
+        assertThat(eventManager.getGiftPrice(totalOrderPrice)).isEqualTo(-25000);
     }
     @DisplayName("고객이 날짜와 주문 메뉴를 입력하면 평일인지 주말인지 확인할 수 있다.")
     @Test

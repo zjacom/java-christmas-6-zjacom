@@ -27,9 +27,9 @@ public class PosMachineTest {
         // given
         PosMachine posMachine = new PosMachine();
         OrderedMenu orderedMenu = new OrderedMenu("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        // when
         posMachine.calculateTotalOrderPrice(orderedMenu);
         posMachine.calculateTotalDiscountPrice(3, orderedMenu.getOrderedMenu());
-        // when
         int totalBenefitAmount = posMachine.calculateTotalBenefitPrice();
         // then
         assertThat(totalBenefitAmount).isEqualTo(-31246);
