@@ -6,10 +6,10 @@ import model.Day;
 import model.OrderedMenu;
 
 public class Service {
-    PosMachine posMachine = new PosMachine();
-    EventManager eventManager = new EventManager();
     private final Day day;
     private final OrderedMenu orderedMenu;
+    PosMachine posMachine = new PosMachine();
+    EventManager eventManager = new EventManager();
 
     public Service(String day, String orderedMenu) {
         this.day = new Day(day);

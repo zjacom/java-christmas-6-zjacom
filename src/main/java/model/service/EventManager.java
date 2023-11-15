@@ -9,10 +9,10 @@ import model.Gift;
 import model.Menu;
 
 public class EventManager {
-    Discount discount = new Discount();
-    Gift gift = new Gift();
     private final String WEEKEND_DISCOUNT = "주말 할인";
     private final String WEEKDAY_DISCOUNT = "평일 할인";
+    Discount discount = new Discount();
+    Gift gift = new Gift();
 
     public List<Integer> checkCustomerCanGetDiscount(int day, Map<String, Integer> orderedMenus, int totalOrderPrice) {
         if (totalOrderPrice >= 10000) {

@@ -6,9 +6,9 @@ import model.Menu;
 import model.OrderedMenu;
 
 public class PosMachine {
-    EventManager eventManager = new EventManager();
     private int totalOrderPrice = 0;
     private int totalDiscountPrice = 0;
+    EventManager eventManager = new EventManager();
 
     public void calculateTotalOrderPrice(OrderedMenu orderedMenu) {
         Map<String, Integer> orderedMenus = orderedMenu.getOrderedMenu();
