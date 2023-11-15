@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import model.Validation;
 import view.InputView;
 
-public class Controller {
+public class InputValueValidationController {
     Validation validation = new Validation();
     InputView inputView = new InputView();
 

@@ -5,8 +5,8 @@ import view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        Controller controller = new Controller();
-        Service service = new Service(controller.inputDay(), controller.inputOrder());
+        InputValueValidationController inputValueValidationController = new InputValueValidationController();
+        Service service = new Service(inputValueValidationController.inputDay(), inputValueValidationController.inputOrder());
         OutputView outputView = new OutputView();
 
         // 입력 받은 메뉴 저장하고 출력
