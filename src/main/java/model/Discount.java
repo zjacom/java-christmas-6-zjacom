@@ -34,6 +34,7 @@ public class Discount {
         return discountPrice;
     }
 
+    // 주말 할인은 [0, 할인 금액], 평일 할인은 [1, 할인 금액]을 반환한다.
     public List<Integer> getWeekendOrWeekdayDiscountPrice(int day, Map<String, Integer> orderedMenus) {
         Calendar calendar = setUpCalendarInstance(day);
         if (isWeekend(calendar)) {

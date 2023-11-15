@@ -12,11 +12,14 @@ public class EventManager {
     Discount discount = new Discount();
     Gift gift = new Gift();
     Badge badge = new Badge();
+    private final String WEEKEND_DISCOUNT = "주말 할인";
+    private final String WEEKDAY_DISCOUNT = "평일 할인";
 
     public List<Integer> checkCustomerCanGetDiscount(int day, Map<String, Integer> orderedMenus, int totalOrderPrice) {
         if (totalOrderPrice >= 10000) {
             return addDiscountDetail(day, orderedMenus);
         }
+        // 할인을 받을 자격이 안되면 빈 리스트 반환
         return List.of();
     }
 
@@ -30,9 +33,9 @@ public class EventManager {
 
     public String checkReservedDayIsWeekendOrWeekday(int day, Map<String, Integer> orderedMenus) {
         if (discount.getWeekendOrWeekdayDiscountPrice(day, orderedMenus).get(0) == 0) {
-            return "주말 할인";
+            return WEEKEND_DISCOUNT;
         }
-        return "평일 할인";
+        return WEEKDAY_DISCOUNT;
     }
 
     public int getGiftPrice(int totalOrderPrice) {

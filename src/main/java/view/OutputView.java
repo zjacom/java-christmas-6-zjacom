@@ -27,14 +27,14 @@ public class OutputView {
         System.out.println(formattedNumber + "원");
     }
 
-    public void printGiftMenu(String giftMenu) {
+    public void printGiftName(String giftName) {
         System.out.println();
         System.out.println("<증정 메뉴>");
-        if (giftMenu.equals("없음")) {
-            System.out.println(giftMenu);
+        if (giftName.equals("없음")) {
+            System.out.println(giftName);
         }
-        if (giftMenu.equals(Menu.CHAMPAGNE.getOrderedMenuName())) {
-            System.out.println(giftMenu + " 1개");
+        if (giftName.equals(Menu.CHAMPAGNE.getOrderedMenuName())) {
+            System.out.println(giftName + " 1개");
         }
     }
 
@@ -45,11 +45,34 @@ public class OutputView {
             System.out.println("없음");
         }
         if (!discountDetails.isEmpty()) {
-            System.out.println("크리스마스 디데이 할인: " + formattingDiscountPrice(discountDetails.get(0)) + "원");
-            System.out.println(weekdayOrWeekend + ": " + formattingDiscountPrice(discountDetails.get(1)) + "원");
-            System.out.println("특별 할인: " + formattingDiscountPrice(discountDetails.get(2)) + "원");
-            System.out.println("증정 이벤트: " + formattingDiscountPrice(giftPrice) + "원");
+            printChristmasDiscount(discountDetails);
+            printWeekendOrWeekdayDiscount(discountDetails, weekdayOrWeekend);
+            printSpecialDiscount(discountDetails);
+            printGiftDiscount(giftPrice);
+        }
+    }
 
+    private void printGiftDiscount(int giftPrice) {
+        if (giftPrice != 0) {
+            System.out.println("증정 이벤트: " + formattingDiscountPrice(giftPrice) + "원");
+        }
+    }
+
+    private void printSpecialDiscount(List<Integer> discountDetails) {
+        if (discountDetails.get(2) != 0) {
+            System.out.println("특별 할인: " + formattingDiscountPrice(discountDetails.get(2)) + "원");
+        }
+    }
+
+    private void printWeekendOrWeekdayDiscount(List<Integer> discountDetails, String weekdayOrWeekend) {
+        if (discountDetails.get(1) != 0) {
+            System.out.println(weekdayOrWeekend + ": " + formattingDiscountPrice(discountDetails.get(1)) + "원");
+        }
+    }
+
+    private void printChristmasDiscount(List<Integer> discountDetails) {
+        if (discountDetails.get(0) != 0) {
+            System.out.println("크리스마스 디데이 할인: " + formattingDiscountPrice(discountDetails.get(0)) + "원");
         }
     }
 
@@ -58,7 +81,7 @@ public class OutputView {
         return decimalFormat.format(price);
     }
 
-    public void printTotalBenefitInfo(int totalBenefitPrice) {
+    public void printTotalBenefitPrice(int totalBenefitPrice) {
         System.out.println();
         System.out.println("<총혜택 금액>");
         if (totalBenefitPrice == 0) {

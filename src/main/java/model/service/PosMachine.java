@@ -29,6 +29,7 @@ public class PosMachine {
     }
 
     public void calculateTotalDiscountPrice(int day, Map<String, Integer> orderedMenu) {
+        // 할인 금액이 저장된 리스트를 가져온다.
         List<Integer> discount = eventManager.checkCustomerCanGetDiscount(day, orderedMenu, totalOrderPrice);
         if (!discount.isEmpty()) {
             for (int discountPrice : discount) {

@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import model.Day;
 import model.OrderedMenu;
-import model.service.EventManager;
-import model.service.PosMachine;
 
 public class Service {
     PosMachine posMachine = new PosMachine();

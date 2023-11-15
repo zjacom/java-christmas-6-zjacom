@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Validation {
     private final String ORDER_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
-    private final String ORDER_ONLY_DRINK_ERROR_MESSAGE = "[ERROR] 음료만 주문 시, 주문할 수 없습니다.";
+    private final String ORDER_ONLY_BEVERAGE_ERROR_MESSAGE = "[ERROR] 음료만 주문 시, 주문할 수 없습니다.";
     private final String ORDER_OVER_QUANTITY_ERROR_MESSAGE = "[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.\n"
             + "(e.g. 시저샐러드-1, 티본스테이크-1, 크리스마스파스타-1, 제로콜라-3, 아이스크림-1의 총개수는 7개)";
     private final String DAY_ERROR_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
@@ -18,7 +18,7 @@ public class Validation {
         validateMenuNameIncludeInMenu(inputValue);
         validateMenuQuantityOverZero(inputValue);
         validateMenuNameDuplicated(inputValue);
-        validateInputValueOnlyDrink(inputValue);
+        validateInputValueOnlyBeverage(inputValue);
         validateOrderedMenuTotalQuantity(inputValue);
     }
 
@@ -79,7 +79,7 @@ public class Validation {
         }
     }
 
-    private void validateInputValueOnlyDrink(String inputValue) {
+    private void validateInputValueOnlyBeverage(String inputValue) {
         Set<String> orderedMenu = new HashSet<>();
         String[] splitByComma = inputValue.split(",");
 
@@ -89,7 +89,7 @@ public class Validation {
             orderedMenu.add(menuName);
         }
         if (isOrderedMenuContainOnlyDrink(orderedMenu)) {
-            throw new IllegalArgumentException(ORDER_ONLY_DRINK_ERROR_MESSAGE);
+            throw new IllegalArgumentException(ORDER_ONLY_BEVERAGE_ERROR_MESSAGE);
         }
     }
 
